@@ -13,6 +13,9 @@ const bootstrap = {
 class Lightbox {
 	constructor(el, options = {}) {
 		this.hash = this.randomHash();
+
+
+
 		this.settings = Object.assign(Object.assign(Object.assign({}, bootstrap.Modal.Default), bootstrap.Carousel.Default), {
 			interval: false,
 			target: '[data-toggle="lightbox"]',
@@ -23,10 +26,14 @@ class Lightbox {
 		this.settings = Object.assign(Object.assign({}, this.settings), options);
 		this.modalOptions = (() => this.setOptionsFromSettings(bootstrap.Modal.Default))();
 		this.carouselOptions = (() => this.setOptionsFromSettings(bootstrap.Carousel.Default))();
+
 		if (typeof el === 'string') {
 			this.settings.target = el;
 			el = document.querySelector(this.settings.target);
 		}
+
+		this.settings.size = el.dataset.size || 'xl';
+
 		this.el = el;
 		this.type = el.dataset.type || '';
 
